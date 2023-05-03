@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
     <title>Attendance Tracker</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div class="card">
-      <h1 id="student-name">John Doe</h1>
+    <div class="container">
+      <div class="card">
+        <h1 id="name"></h1>
+        <div class="buttons">
+          <button id="present-btn">Present</button>
+          <button id="absent-btn">Absent</button>
+        </div>
+      </div>
+      <div class="table">
+        <h2>Attendance Table</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Attendance</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+          </tbody>
+        </table>
+      </div>
+      <div class="options">
+        <button id="redo-btn">Redo</button>
+        <button id="show-table-btn">Show Table</button>
+      </div>
     </div>
-    <button id="present-btn">Present</button>
-    <button id="absent-btn">Absent</button>
-    <table id="attendance-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Attendance</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Table rows will be added dynamically using JavaScript -->
-      </tbody>
-    </table>
     <script src="script.js"></script>
-    <script src="server.js"></script>
   </body>
 </html>

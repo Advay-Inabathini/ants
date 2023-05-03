@@ -1,66 +1,102 @@
-// Define an array of student names
-const students = ['John Doe', 'Jane Doe', 'Bob Smith','advay inabathini', 'rochak saini','suhani jain'];
+// define variables
+let students = [];
+let currentStudent = 0;
+let presentCount = 0;
+let absentCount = 0;
+let table = document.getElementById("table-body");
+let name = document.getElementById("name");
+let presentBtn = document.getElementById("present-btn");
+let absentBtn = document.getElementById("absent-btn");
+let redoBtn = document.getElementById("redo-btn");
+let showTableBtn = document.getElementById("show-table-btn");
+let card = document.querySelector(".card");
+let tableDiv = document.querySelector(".table");
 
-// Get references to the HTML elements
-const studentNameEl = document.getElementById('student-name');
-const presentBtn = document.getElementById('present-btn');
-const absentBtn = document.getElementById('absent-btn');
-const attendanceTableBody = document.querySelector('#attendance-table tbody');
+// get students from the database
+getStudents();
 
-let currentStudentIndex = 0;
-let attendanceData = [];
-
-// Update the student name on the card
-function updateStudentName() {
-  studentNameEl.innerText = students[currentStudentIndex];
+// function to get students from the database
+function getStudents() {
+  // make a GET request to the server to get the students
+  fetch("get_students.php")
+    .then(response => response.json())
+    .then(data => {
+      students = data;
+      // display the first student on the card
+      displayStudent();
+    });
 }
 
-// Add the attendance data for the current student to the attendanceData array
-function addAttendanceData(present) {
-  attendanceData.push({
-    name: students[currentStudentIndex],
-    present: present
-  });
+// function to display the current student on the card
+function displayStudent() {
+  name.textContent = students[currentStudent].name;
 }
 
-// Update the attendance table with the attendance data
-function updateAttendanceTable() {
-  attendanceTableBody.innerHTML = '';
-
-  for (let i = 0; i < attendanceData.length; i++) {
-    const row = document.createElement('tr');
-    const nameCell = document.createElement('td');
-    const attendanceCell = document.createElement('td');
-
-    nameCell.innerText = attendanceData[i].name;
-    attendanceCell.innerText = attendanceData[i].present ? 'Present' : 'Absent';
-
-    row.appendChild(nameCell);
-    row.appendChild(attendanceCell);
-    attendanceTableBody.appendChild(row);
+// function to update the attendance count
+function updateAttendanceCount(status) {
+  if (status === "present") {
+    presentCount++;
+  } else {
+    absentCount++;
   }
 }
 
-// Event listener for the present button
-presentBtn.addEventListener('click', () => {
-  addAttendanceData(true);
-  currentStudentIndex++;
+// function to update the attendance table
+function updateAttendanceTable() {
+  let newRow = table.insertRow();
+  let nameCell = newRow.insertCell(0);
+  let statusCell = newRow.insertCell(1);
+  nameCell.textContent = students[currentStudent].name;
+  statusCell.textContent = (presentBtn.disabled) ? "Absent" : "Present";
+}
 
-  if (currentStudentIndex >= students.length) {
-    updateAttendanceTable();
+// function to reset the attendance counts and table
+function resetAttendance() {
+  presentCount = 0;
+  absentCount = 0;
+  table.innerHTML = "";
+}
+
+// add event listeners to the present and absent buttons
+presentBtn.addEventListener("click", function() {
+  updateAttendanceCount("present");
+  updateAttendanceTable();
+  currentStudent++;
+  if (currentStudent < students.length) {
+    displayStudent();
   } else {
-    updateStudentName();
+    // if all students have been displayed, show the options
+    card.style.display = "none";
+    tableDiv.style.display = "block";
   }
 });
 
-// Event listener for the absent button
-absentBtn.addEventListener('click', () => {
-  addAttendanceData(false);
-  currentStudentIndex++;
+absentBtn.addEventListener("click", function() {
+  updateAttendanceCount("absent");
+  updateAttendanceTable();
+  currentStudent++;
+  if (currentStudent < students.length) {
+    displayStudent();
+  } else {
+    // if all students have been displayed, show the options
+    card.style.display = "none";
+    tableDiv.style.display = "block";
+  }
+});
 
-  if (currentStudentIndex >= students.length) {
-    updateAttendanceTable();
-    } else {
-    updateStudentName();
-    }
-    });
+// add event listeners to the redo and show table buttons
+redoBtn.addEventListener("click", function() {
+  // reset the attendance counts and table
+  resetAttendance();
+  // display the first student on the card
+  currentStudent = 0;
+  displayStudent();
+  // hide the table and show the card
+  tableDiv.style.display = "none";
+  card.style.display = "block";
+});
+
+showTableBtn.addEventListener("click", function() {
+  // show the attendance table
+  tableDiv.style.display = "block";
+});
