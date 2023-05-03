@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Tracker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Function to retrieve list of students from the backend
+        function getStudents() {
+            $.get('/students', function(data) {
+                // Create an attendance form for each student
+                data.forEach(function(student) {
+                    $('#attendance-form').append('<div>' + student[1] + ': <select name="' + student[0] + '">' + 
+                        '<option value="Present">Present</option>' + 
+                        '<option value="Absent">Absent</option>' + 
+                        '</select></div>');
+                });
+            });
+        }
+
+        // Function to submit the attendance data to the backend
+        function submitAttendance() {
+            // Get the date and attendance data from the form
+            var date = $('#date').val();
+            var attendance_data = {};
+            $('#attendance-form select').each(function() {
+                var student_id = $(this).attr('name');
+                var status = $(this).val();
+                attendance_data[student_id] = status;
+            });
+
+            // Send the data to the backend
+            $.ajax({
+                type: 'POST',
+                url: '/attendance',
+                data: JSON.stringify({
+                    date: date,
+                    attendance_data: attendance_data
+                }),
+                contentType

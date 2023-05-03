@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Attendance</title>
+</head>
+<body>
+	<h1>Attendance</h1>
+	<?php
+		$servername = "localhost";
+		$username = "root";
+		$password = "lenovo";
+		$dbname = "mydb";
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+
+		// Check connection
+		if ($conn->connect_error) {
+		    die("Connection failed: " . $conn->connect_error);
+		}
+
+		// Query to get all students
+		$sql = "SELECT * FROM students";
+		$result = $conn->query($sql);
+
+		if ($result->num_rows > 0) {
+		    // Output the table with the students and the attendance form
+		    echo "<form action='submit_attendance.php' method='POST'><table><tr><th>Name</th><th>Attendance</th></tr>";
+		    while($row = $result->fetch_assoc()) {
+		        echo "<tr><td>" . $row["name"]. "</td><td><input type='radio' name='attendance[" . $row["student_id"] . "]' value='Present' checked='checked'>Present<input type='radio' name='attendance[" . $row["student_id"] . "]' value='Absent'>Absent</td></tr>";
+		    }
+		    echo "</table><br><input type='submit' value='Submit Attendance'></form>";
+		} else {
+		    echo "No students found";
+		}
+
+		$conn->close();
+	?>
+</body>
+</html>
