@@ -1,27 +1,21 @@
 <?php
-    // Connect to the database
-    $host = "localhost";
-    $user = "root";
-    $password = "lenovo";
-    $database = "mydb";
-    $conn = mysqli_connect($host, $user, $password, $database);
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
+//connect to the database
+require_once('db_connection.php');
 
-    // Get the date and attendance data from the POST request
-    $date = $_POST['date'];
-    $attendance_data = $_POST['attendance_data'];
+//get the current date
+$date = date("Y-m-d");
 
-    // Update the attendance table for each student
-    foreach ($attendance_data as $student_id => $status) {
-        $sql = "INSERT INTO attendance (student_id, date, status) VALUES ('$student_id', '$date', '$status')
-                ON DUPLICATE KEY UPDATE status='$status'";
-        if (!mysqli_query($conn, $sql)) {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-    }
+//loop through each student in the attendance form
+foreach($_POST['attendance'] as $student_id => $status) {
+    //insert the attendance record into the database
+    $sql = "INSERT INTO attendance_records (date, student_id, status) VALUES ('$date', $student_id, '$status')";
+    mysqli_query($conn, $sql);
+}
 
-    // Close the database connection
-    mysqli_close($conn);
+//close the database connection
+mysqli_close($conn);
+
+//redirect the user to the attendance table page
+header("Location: attendance_table.php");
+exit;
 ?>
