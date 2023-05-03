@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Attendance System</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-	<h1>Attendance System</h1>
-	<form method="POST" action="submit_attendance.php">
-		<table>
-			<tr>
-				<th>Student ID</th>
-				<th>Name</th>
-				<th>Attendance</th>
-			</tr>
-			<?php include "db_connection.php";
-			$result = mysqli_query($connection,"SELECT * FROM students");
-			while($row = mysqli_fetch_array($result)) {
-			?>
-			<tr>
-				<td><?php echo $row["student_id"]; ?></td>
-				<td><?php echo $row["student_name"]; ?></td>
-				<td>
-					<label><input type="radio" name="<?php echo $row["student_id"]; ?>" value="present">Present</label>
-					<label><input type="radio" name="<?php echo $row["student_id"]; ?>" value="absent">Absent</label>
-				</td>
-			</tr>
-			<?php } ?>
-		</table>
-		<input type="submit" value="Submit">
-	</form>
-	<script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Attendance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="card">
+      <h1 id="student-name">John Doe</h1>
+    </div>
+    <button id="present-btn">Present</button>
+    <button id="absent-btn">Absent</button>
+    <table id="attendance-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Attendance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Table rows will be added dynamically using JavaScript -->
+      </tbody>
+    </table>
+    <script src="script.js"></script>
+    <script src="server.js"></script>
+  </body>
 </html>

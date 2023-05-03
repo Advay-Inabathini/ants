@@ -1,34 +1,30 @@
-body {
-	font-family: Arial, sans-serif;
-}
-
-h1 {
-	text-align: center;
-}
-
-table {
-	margin: 0 auto;
-	border-collapse: collapse;
-}
-
-table, th, td {
-	border: 1px solid black;
-	padding: 10px;
-}
-
-th {
-	background-color: #ccc;
-}
-
-input[type="submit"] {
-	margin: 20px auto;
-	display: block;
-}
-
-.attendance {
-	background-color: #99ff99;
-}
-
-.absent {
-	background-color: #ff9999;
-}
+.card {
+    border: 1px solid black;
+    width: 300px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+  }
+  
+  .card h1 {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  #present-btn, #absent-btn {
+    margin: 10px;
+  }
+  
+  #attendance-table {
+    border-collapse: collapse;
+    margin: 50px auto;
+  }
+  
+  #attendance-table th, #attendance-table td {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  
