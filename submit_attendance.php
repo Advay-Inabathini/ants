@@ -1,21 +1,33 @@
 <?php
-//connect to the database
-require_once('db_connection.php');
+// establish database connection
+$servername = "localhost";
+$username = "root";
+$password = "lenovo";
+$dbname = "mydb";
 
-//get the current date
-$date = date("Y-m-d");
+$conn = mysqli_connect($servername, $username, $password, $dbname);
 
-//loop through each student in the attendance form
-foreach($_POST['attendance'] as $student_id => $status) {
-    //insert the attendance record into the database
-    $sql = "INSERT INTO attendance_records (date, student_id, status) VALUES ('$date', $student_id, '$status')";
-    mysqli_query($conn, $sql);
+// check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-//close the database connection
-mysqli_close($conn);
+// get POST data from form
+$class_id = $_POST['class_id'];
+$date = $_POST['date'];
+$students = $_POST['students'];
 
-//redirect the user to the attendance table page
-header("Location: attendance_table.php");
-exit;
+// insert attendance data for each student into database
+foreach ($students as $student_id => $attendance_status) {
+    $sql = "INSERT INTO attendance (class_id, student_id, date, status) VALUES ('$class_id', '$student_id', '$date', '$attendance_status')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Attendance submitted successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+}
+
+// close database connection
+mysqli_close($conn);
 ?>
