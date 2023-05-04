@@ -3,7 +3,29 @@ body {
   background-image: url(./img/dots.png);
   background-size: contain;
 }
+.navbar {
+  background-color: #0d6efd !important;
+  padding: 1rem !important;
+}
 
+.navbar .navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.name-container {
+  display: block;
+}
+
+.attendance-container {
+  display: none;
+}
+
+.scrolldown {
+  font-size: 5rem;
+  color: #0d6efd;
+  display: none;
+}
 .card {
     /* border: 1px solid black; */
     width: fit-content;
@@ -13,7 +35,7 @@ body {
     justify-content: center;
     margin: 50px auto;
     /* padding: 4rem; */
-    margin-top: 25%;
+    margin-top: 22%;
 
     /* From https://css.glass */
 background: #1f2251 !important;
@@ -48,6 +70,24 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 
   #present-btn, #absent-btn {
     margin: 10px;
+  }
+
+  #present-btn:hover {
+    background-color: #28a745;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+transform: translateY(-0.25rem);
+transition: 0.25s;
+  }
+
+  #absent-btn:hover {
+    background: red;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+transform: translateY(-0.25rem);
+transition: 0.25s;
   }
   
   #attendance-table {

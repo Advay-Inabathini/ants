@@ -10,6 +10,9 @@ let absentBtn = document.getElementById("absent-btn");
 let redoBtn = document.getElementById("redo-btn");
 let showTableBtn = document.getElementById("show-table-btn");
 let card = document.querySelector(".card");
+let scrolldown = document.querySelector(".scrolldown");
+let name_container = document.querySelector(".name-container");
+let attendance_container = document.querySelector(".attendance-container");
 let tableDiv = document.querySelector(".table");
 let statusofattendance = "unkown";
 
@@ -94,6 +97,9 @@ presentBtn.addEventListener("click", function() {
     // if all students have been displayed, show the options
     card.style.display = "none";
     tableDiv.style.display = "block";
+    // scrolldown.style.display = "block";
+    name_container.style.display = "none";
+    attendance_container.style.display = "block";
   }
 });
 
@@ -108,6 +114,8 @@ absentBtn.addEventListener("click", function() {
     // if all students have been displayed, show the options
     card.style.display = "none";
     tableDiv.style.display = "block";
+    name_container.style.display = "none";
+    attendance_container.style.display = "block";
   }
 });
 
