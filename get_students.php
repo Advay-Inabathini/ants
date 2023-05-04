@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // SQL query to select all students
-$sql = "SELECT * FROM students";
+$sql = "SELECT * FROM student";
 $result = $conn->query($sql);
 
 // Initialize an empty array to hold the results
