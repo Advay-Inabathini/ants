@@ -1,3 +1,9 @@
+body {
+  background-color: #171941 !important;
+  background-image: url(./img/dots.png);
+  background-size: contain;
+}
+
 .card {
     /* border: 1px solid black; */
     width: fit-content;
@@ -6,11 +12,11 @@
     align-items: center;
     justify-content: center;
     margin: 50px auto;
-    padding: 4rem;
+    /* padding: 4rem; */
     margin-top: 25%;
 
     /* From https://css.glass */
-background: rgba(255, 255, 255, 0.17);
+background: #1f2251 !important;
 border-radius: 16px;
 box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(5px);
@@ -22,8 +28,24 @@ border: 1px solid rgba(255, 255, 255, 0.3);
     font-size: 10rem;
     font-weight: bold;
     text-align: center;
+    color: white;
+  }
+
+  .card .card-name {
+    padding: 3rem;
+    background-color: #0d6efd;
   }
   
+  .card .buttons {
+    padding: 1rem 0 1rem 0;
+  }
+
+  .card .btn {
+    font-size: 2rem;
+    padding: 1rem 2rem 1rem 2rem;
+    font-weight: bold;
+  }
+
   #present-btn, #absent-btn {
     margin: 10px;
   }
