@@ -138,6 +138,8 @@ redoBtn.addEventListener("click", function() {
   // hide the table and show the card
   tableDiv.style.display = "none";
   card.style.display = "block";
+  name_container.style.display = "block";
+  attendance_container.style.display = "none";
 });
 
 showTableBtn.addEventListener("click", function() {
