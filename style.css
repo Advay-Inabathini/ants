@@ -11,6 +11,7 @@ body {
 .navbar .navbar-brand {
   font-size: 2rem;
   font-weight: bold;
+  color: white;
 }
 
 .name-container {
@@ -36,7 +37,7 @@ body {
     justify-content: center;
     margin: 50px auto;
     /* padding: 4rem; */
-    margin-top: 22%;
+    margin-top: 15%;
 
     /* From https://css.glass */
 background: #1f2251 !important;

@@ -2,9 +2,9 @@
 
 // Database configuration
 $servername = "localhost";
-$username = "your-username";
-$password = "your-password";
-$dbname = "your-database-name";
+$username = "root";
+$password = "lenovo";
+$dbname = "mydb";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

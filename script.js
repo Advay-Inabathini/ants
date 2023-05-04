@@ -180,3 +180,16 @@ function exportAttendanceTable() {
 }
 
 console.log("i'm alive")
+
+function markAttendanceTaken() {
+  console.log("im still alive")
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log(this.responseText);
+    }
+  };
+  xhr.open("GET", "mark_attendance_taken.php", true);
+  xhr.send();
+}
+ 
